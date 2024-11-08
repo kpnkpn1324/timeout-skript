@@ -1,0 +1,59 @@
+options:
+	타임아웃: [ &6타임아웃관리명령어 가이드 &f]
+
+on tab complete of "/타임아웃":
+    set tab completions for position 1 to "?", "보내기", "해제", "시간확인", "연장", "위치설정", "이동", "해제", "비활성화" and "활성화"
+    if tab arg-1 = "보내기":
+        send action bar "{@타임아웃} &a/타임아웃 (보내기) (닉) (사유) (분) (초) &f- &b해당플레이어를 타임아웃함" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 (보내기) (닉) (사유) (분) (초) &f- &b해당플레이어를 타임아웃함" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 (보내기) (닉) (사유) (분) (초) &f- &b해당플레이어를 타임아웃함" to player
+    if tab arg-1 = "해제":
+        send action bar "{@타임아웃} &a/타임아웃 해제 (닉네임) &f- &b타임아웃을 해제함" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 해제 (닉네임) &f- &b타임아웃을 해제함" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 해제 (닉네임) &f- &b타임아웃을 해제함" to player
+    if tab arg-1 = "시간확인":
+        send action bar "{@타임아웃} &a/타임아웃 시간확인 (닉네임) &f- &b타임아웃중인 사람의 타이머를 확인" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 시간확인 (닉네임) &f- &b타임아웃중인 사람의 타이머를 확인" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 시간확인 (닉네임) &f- &b타임아웃중인 사람의 타이머를 확인" to player
+    if tab arg-1 = "목록":
+        send action bar "{@타임아웃} &a/타임아웃 목록 &f- &b타임아웃당한 사람 목록 확인" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 목록 &f- &b타임아웃당한 사람 목록 확인" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 목록 &f- &b타임아웃당한 사람 목록 확인" to player
+    if tab arg-1 = "연장":
+        send action bar "{@타임아웃} &a/타임아웃 연장 &f- &b남은시간에서 +연장시간" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 연장 &f- &b남은시간에서 +연장시간" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 연장 &f- &b남은시간에서 +연장시간" to player
+    if tab arg-1 = "위치설정":
+        send action bar "{@타임아웃} &a/타임아웃 위치설정 &f- &b타임아웃했을때 와지는 장소설정" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 위치설정 &f- &b타임아웃했을때 와지는 장소설정" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 위치설정 &f- &b타임아웃했을때 와지는 장소설정" to player
+    if tab arg-1 = "이동":
+        send action bar "{@타임아웃} &a/타임아웃 이동 &f-  &b설정된 위치로 바로 TP" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 이동 &f-  &b설정된 위치로 바로 TP" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 이동 &f-  &b설정된 위치로 바로 TP" to player
+    if tab arg-1 = "비활성화":
+        send action bar "{@타임아웃} &a/타임아웃 비활성화 &f- &b타임아웃을 할수 없음" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 비활성화 &f- &b타임아웃을 할수 없음" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 비활성화 &f- &b타임아웃을 할수 없음" to player
+    if tab arg-1 = "활성화":
+        send action bar "{@타임아웃} &a/타임아웃 활성화 &f- &b타임아웃을 보낼수 있게 됨" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 활성화 &f- &b타임아웃을 보낼수 있게 됨" to player
+        wait 2 seconds
+        send action bar "{@타임아웃} &a/타임아웃 활성화 &f- &b타임아웃을 보낼수 있게 됨" to player

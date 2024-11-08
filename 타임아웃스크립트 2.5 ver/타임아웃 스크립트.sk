@@ -1,0 +1,139 @@
+options:
+	구금: [ &6타임아웃 &f]
+
+
+command /타임아웃 [<text>] [<player>] [<text>] [<number>] [<number>]:
+    trigger:
+        if player is op:
+            if arg-1 is "?":
+                send "{@구금} &a/타임아웃 (보내기) (닉) (사유) (분) (초) &f- &b플레이어를 타임아웃"
+                send "{@구금} &a/타임아웃 해제 (닉네임) &f- &b타임아웃을 해제함"
+                send "{@구금} &a/타임아웃 시간확인 (닉네임) &f- &b타임아웃중인 사람의 타이머를 확인"
+                send "{@구금} &a/타임아웃 목록 &f- &b타임아웃당한 사람 목록 확인"
+                send "{@구금} &a/타임아웃 연장 &f- &b남은시간에서 +연장시간"
+                send " "
+                send "{@구금} &a/타임아웃 위치설정 &f- &b타임아웃을 보내지면 와지는 장소 설정"
+                send "{@구금} &a/타임아웃 이동 &f-  &b설정된 위치로 바로 TP"
+                send "{@구금} &a/타임아웃 비활성화 &f- &b타임아웃을 보낼수 없음"
+                send "{@구금} &a/타임아웃 활성화 &f- &b타임아웃을 보낼수 있게 됨"
+            if arg-1 is not set:
+                send "{@구금} &a/타임아웃 (보내기) (닉) (사유) (분) (초) &f- &b플레이어를 타임아웃"
+                send "{@구금} &a/타임아웃 해제 (닉네임) &f- &b타임아웃을 해제함"
+                send "{@구금} &a/타임아웃 시간확인 (닉네임) &f- &b타임아웃중인 사람의 타이머를 확인"
+                send "{@구금} &a/타임아웃 목록 &f- &b타임아웃당한 사람 목록 확인"
+                send "{@구금} &a/타임아웃 연장 &f- &b남은시간에서 +연장시간"
+                send " "
+                send "{@구금} &a/타임아웃 위치설정 &f- &b타임아웃을 보내지면 와지는 장소 설정"
+                send "{@구금} &a/타임아웃 이동 &f-  &b설정된 위치로 바로 TP"
+                send "{@구금} &a/타임아웃 비활성화 &f- &b타임아웃을 보낼수 없음"
+                send "{@구금} &a/타임아웃 활성화 &f- &b타임아웃을 보낼수 있게 됨"
+            if arg-1 is "위치설정":
+                set {nootnoot::location} to location of player
+                send "{@구금} &e현재 서있는 위치로 구금 장소 설정이 완료 되었습니다"
+            
+            if arg-1 is "활성화":
+                set {nootnoot::onoff} to true
+                send "{@구금} &a구금이 활성화 되었습니다"
+
+
+            if arg-1 is "비활성화":
+                set {nootnoot::onoff} to false
+                send "{@구금} &c구금이 비활성화 되었습니다"
+                
+                
+            if arg-1 is "이동":
+                teleport player to {nootnoot::location}
+                send "{@구금} &e설정된 구금위치로 이동하였습니다"
+
+
+            
+            if arg-1 is "보내기":
+                if arg-4 >= 0:
+                    if arg-5 <= 59:
+                        if arg-5 >= 0:
+                            if {nootnoot::onoff} is true:
+                                teleport arg-2 to {nootnoot::location}
+                                set {nootnoot::bad::%arg-2%} to 1
+                                set {nootnoot::bad::%arg-2%::m} to arg-4
+                                set {nootnoot::bad::%arg-2%::s} to arg-5
+                                execute console command "/gamemode adventure %arg-2%"
+                                send "{@구금} &c%arg-2%&e님을 &8%arg-3%&e의 사유로 &f[&a%arg-4%&f분 &a%arg-5%&f초]&e동안 구금에 넣었습니다"
+                                send subtitle "[&8구금사유:&c%arg-3%&f]" to arg-2 for 5 seconds
+                                send title "[&8구금되었습니다!&f]" to arg-2 for 5 seconds
+                            else:
+                                send "{@구금} &c구금이 비활성화 상태입니다"
+                        else:
+                            send "{@구금} &c초 설정이 잘못되었습니다"
+                    else:
+                        send "{@구금} &c초 설정이 잘못되었습니다"
+                else:
+                    send "{@구금} &c분 설정이 잘못되었습니다"
+
+
+            if arg-1 is "해제":
+                if {nootnoot::bad::%arg-2%} is set:
+                    execute console command "/spawn %arg-2%"
+                    execute console command "/gamemode survival %arg-2%"
+                    delete {nootnoot::bad::%arg-2%}
+                    send "&c%arg-2%&e님의 구금을 해제하였습니다"
+                    send title "[&9구금이 해제되었습니다!&f]" to arg-2 for 5 seconds
+
+
+            if arg-1 is "목록":
+                send "{@구금} &e현재 구금상태인 플레이어는 다음과 같습니다"
+                loop all players:
+                    if {nootnoot::bad::%loop-player%} is set:
+                        send "&c%loop-player%"
+
+
+            
+            if arg-1 is "시간확인":
+                if {nootnoot::bad::%arg-2%} is set:
+                    send "{@구금} &c%arg-2%&e님의 현재 남은 구금시간은 &f[&e%{nootnoot::bad::%arg-2%::m}%분 %{nootnoot::bad::%arg-2%::s}%초&f]&e입니다"
+
+                else:
+                    send "{@구금} &c%arg-2%님은 현재 구금상태가 아닙니다"
+
+            
+            if arg-1 is "연장":
+                if {nootnoot::bad::%arg-2%} is set:
+                    send subtitle "[&8연장사유:&c%arg-3%&f]" to arg-2 for 5 seconds
+                    send "{@구금} &c%arg-2%&e님을 &8%arg-3%&e의 사유로 &f[&a%arg-4%&f분 &a%arg-5%&f초]&e만큼 연장하였습니다         &f(&c%arg-2%&e님의&r&e현재남은 시간&f: &e%{nootnoot::bad::%arg-2%::m}%&f분 &e%{nootnoot::bad::%arg-2%::s}%&f초)"
+                    send title "[&8당신의 구금시간이 연장 되었습니다!&f]" to arg-2 for 5 seconds
+                    add arg-4 to {nootnoot::bad::%arg-2%::m}
+                    add arg-5 to {nootnoot::bad::%arg-2%::s}
+
+                else:
+                    send "{@구금} &c%arg-2%님은 현재 구금상태가 아닙니다"
+
+
+
+Every 1 seconds:
+    loop all players:
+        if {nootnoot::bad::%loop-player%} is set:
+            if {nootnoot::bad::%loop-player%::s} <= 60:
+                if {nootnoot::bad::%loop-player%::m} <= -1:
+                    send title "[&a구금이 해제되었습니다!&f]" to loop-player for 5 seconds
+                    execute console command "/spawn %loop-player%"
+                    execute console command "/gamemode survival %loop-player%"
+                    delete {nootnoot::bad::%loop-player%}
+        if {nootnoot::bad::%loop-player%} is set:
+            subtract 1 from {nootnoot::bad::%loop-player%::s}
+            send action bar "[&e남은 시간&f: &e%{nootnoot::bad::%loop-player%::m}%&f분 &e%{nootnoot::bad::%loop-player%::s}%&f초]" to loop-player
+        if {nootnoot::bad::%loop-player%::s} <= 1:
+            subtract 1 from {nootnoot::bad::%loop-player%::m}
+            set {nootnoot::bad::%loop-player%::s} to 60
+
+
+        
+
+
+
+
+                
+
+
+                
+    
+
+            
